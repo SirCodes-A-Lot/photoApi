@@ -1,4 +1,4 @@
-package com.photoApi.restControllers;
+package com.photoApi.photoObjects;
 
 import java.util.HashMap;
 

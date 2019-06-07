@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import com.photoApi.restControllers.Response;
+import com.photoApi.photoObjects.Response;
 
 public class RestControllers {
 	
