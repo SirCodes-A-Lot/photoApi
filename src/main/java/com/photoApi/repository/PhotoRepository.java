@@ -1,4 +1,4 @@
-package repository;
+package com.photoApi.repository;
 
 import org.springframework.data.repository.CrudRepository;
 
