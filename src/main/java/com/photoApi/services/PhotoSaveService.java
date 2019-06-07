@@ -21,12 +21,9 @@ public class PhotoSaveService {
 	/**
 	 * gets the location of the photo from coords to populate metadata
 	 */
-	
 	private HashMap<String, String> getPhotoLocation(double xCoord, double yCoord) {
-		HashMap<String, String> location = new HashMap();
+		HashMap<String, String> location = new HashMap<>();
 		//TODO get location data and populate into hashmap
 		return location;
-		
 	}
-
 }
