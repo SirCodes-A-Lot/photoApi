@@ -2,19 +2,37 @@ package com.photoApi.restControllers;
 
 import java.util.HashMap;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.photoApi.photoObjects.Response;
+import com.photoApi.services.PhotoRetrieveService;
+import com.photoApi.services.PhotoSaveService;
 
+@RestController
 public class RestControllers {
 	
+	private PhotoSaveService photoSaveService;
+	
+	private PhotoRetrieveService photoRetrieveService;
+	
+	@Autowired
+	public RestControllers(PhotoSaveService photoSaveService, PhotoRetrieveService photoRetrieveService) {
+		this.photoSaveService = photoSaveService;
+		this.photoRetrieveService = photoRetrieveService;
+	}
+	
 	//returns a list of all photos data
-	@GetMapping(value = "/getAllPhotosData")
+	@GetMapping("/getAllPhotosData")
 	public Response getAllPhotosData() {
+		//TODO remove line below
+		return new Response("", new HashMap<String, Object>());
     	HashMap<String,Object> responseData = new HashMap<String,Object> ();
     	Response response = new Response("200", responseData);
+    	response.data.put("photoList", photoRetrieveService.retrieveAllPhotos());
 		return response;
 	}
 	
