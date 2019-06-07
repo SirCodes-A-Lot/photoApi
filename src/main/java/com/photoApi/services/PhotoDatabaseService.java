@@ -7,12 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.photoApi.photoObjects.PhotoData;
 import com.photoApi.repository.PhotoRepository;
 
-public class PhotoDataBaseService {
+public class PhotoDatabaseService {
 	
 	private PhotoRepository photoRepository;
 	
 	@Autowired
-	public PhotoDataBaseService(PhotoRepository photoRepository) {
+	public PhotoDatabaseService(PhotoRepository photoRepository) {
 		this.photoRepository = photoRepository;
 	}
 	
