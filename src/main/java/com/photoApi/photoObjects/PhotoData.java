@@ -10,7 +10,7 @@ import javax.persistence.TemporalType;
 
 import org.springframework.data.annotation.CreatedDate;
 
-//check this is the right entity import
+//TODO check this is the right entity import and other imports are correct too!
 @Entity
 public class PhotoData {
 	
