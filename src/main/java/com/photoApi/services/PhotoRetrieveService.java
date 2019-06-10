@@ -30,7 +30,7 @@ public class PhotoRetrieveService {
 	}
 	
 	public String getImageForPhoto(String filename) {
-		PhotoData photoData = photoDatabaseService.getPhotoDataByFilename(filename);
+		PhotoData photoData = photoDatabaseService.findPhotoDataByFilename(filename);
 		if (photoData != null) {
 			return photoData.getImageData();
 		}
@@ -38,7 +38,7 @@ public class PhotoRetrieveService {
 	}
 	
 	public PhotoMetadata getPhotoMetadataByFilename(String filename){
-		PhotoData photoData = photoDatabaseService.getPhotoDataByFilename(filename);
+		PhotoData photoData = photoDatabaseService.findPhotoDataByFilename(filename);
 		if (photoData != null) {
 			return new PhotoMetadata(photoData);
 		} else {

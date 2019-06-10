@@ -80,7 +80,7 @@ public class RestControllers {
         			Double.valueOf((String) requestData.get("xcoord")),
         			Double.valueOf((String) requestData.get("ycoord")));
         	if (!isUniqueFilename) {
-        		responseData.put("Error", "File names must be unique");
+        		responseData.put("Error", "File names and content must be unique");
         	}
         	response = new Response("200", responseData);
     	} else {

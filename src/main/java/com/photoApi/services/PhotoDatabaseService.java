@@ -29,12 +29,16 @@ public class PhotoDatabaseService {
 		return photoDataList;
 	}
 
-	public PhotoData getPhotoDataByFilename(String filename) {
+	public PhotoData findPhotoDataByFilename(String filename) {
 		return photoRepository.findByFilename(filename);
 	}
 
 	public int deleteAllPhotosByFilename(String filename) {
 		return photoRepository.deleteAllByFilename(filename);
+	}
+	
+	public PhotoData findPhotoByPhotoData(String imageData) {
+		return photoRepository.findByImageData(imageData);
 	}
 
 }

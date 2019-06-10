@@ -19,7 +19,8 @@ public class PhotoSaveService {
 	}
 	
 	public boolean savePhotoToDataBase(String filename, String imageData, String format, double xCoord, double yCoord) {
-		if (photoDatabaseService.getPhotoDataByFilename (filename)!= null) {
+		if (photoDatabaseService.findPhotoDataByFilename (filename)!= null ||
+			photoDatabaseService.findPhotoByPhotoData(imageData) != null) {
 			return false;
 		}
 		HashMap<String, String> location = getPhotoLocation(xCoord, yCoord);
