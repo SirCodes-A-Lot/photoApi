@@ -40,7 +40,6 @@ public class RestControllers {
 		return response;
 	}
 	
-	//TODO
 	//returns a requested photo data
 	@PostMapping(value = "/getRequestedPhotoData")
     public Response getRequestedPhotoData(@RequestBody HashMap<String,Object> requestData) {
@@ -76,7 +75,6 @@ public class RestControllers {
     	return response;
     }
 	
-	//TODO
 	//deletes a photo from the database
 	@PostMapping(value = "/deletePhoto")
     public Response deletePhoto(@RequestBody HashMap<String,Object> requestData) {

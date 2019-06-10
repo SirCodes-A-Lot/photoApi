@@ -23,8 +23,11 @@ public class PhotoRetrieveService {
 	}
 	
 	public String getImageForPhoto(String filename) {
-		//TODO do null check
-		return photoDatabaseService.getPhotoDataByFilename(filename).getImageData();
+		PhotoData photoData = photoDatabaseService.getPhotoDataByFilename(filename);
+		if (photoData != null) {
+			return photoData.getImageData();
+		}
+		return null;
 	}
 	
 	public PhotoMetadata getPhotoMetadataByFilename(String filename){
