@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.photoApi.photoObjects.Response;
+import com.photoApi.services.PhotoDeleteService;
 import com.photoApi.services.PhotoRetrieveService;
 import com.photoApi.services.PhotoSaveService;
 
@@ -19,10 +20,14 @@ public class RestControllers {
 	
 	private PhotoRetrieveService photoRetrieveService;
 	
+	private PhotoDeleteService photoDeleteService;
+	
 	@Autowired
-	public RestControllers(PhotoSaveService photoSaveService, PhotoRetrieveService photoRetrieveService) {
+	public RestControllers(PhotoSaveService photoSaveService, PhotoRetrieveService photoRetrieveService,
+			PhotoDeleteService photoDeleteService) {
 		this.photoSaveService = photoSaveService;
 		this.photoRetrieveService = photoRetrieveService;
+		this.photoDeleteService = photoDeleteService;
 	}
 	
 	//returns a list of all photos data
@@ -67,18 +72,26 @@ public class RestControllers {
 	//deletes a photo from the database
 	@PostMapping(value = "/deletePhoto")
     public Response deletePhoto(@RequestBody HashMap<String,Object> requestData) {
+		Response response; 
     	HashMap<String,Object> responseData = new HashMap<String,Object> ();
-    	Response response = new Response("200", responseData);
+		if (requestData.containsKey("filename")) {
+			int numberDeleted = photoDeleteService.deleteAllPhotosByFilename((String) requestData.get("filename"));
+			responseData.put("numberDeleted", numberDeleted);
+			response = new Response("200", responseData);
+		} else {
+			response = new Response("400", responseData);
+		}
     	return response;
     }
 	
-	//TODO
 	//get a photo picture
 	@PostMapping(value = "/getPhotoPicture")
     public Response getPhotoPicture(@RequestBody HashMap<String,Object> requestData) {
 		Response response; 
     	HashMap<String,Object> responseData = new HashMap<String,Object> ();
 		if (requestData.containsKey("filename")) {
+			String imageData = photoRetrieveService.getImageForPhoto((String) requestData.get("filename"));
+			responseData.put("imageData", imageData);
 			response = new Response("200", responseData);
 		} else {
 			response = new Response("400", responseData);

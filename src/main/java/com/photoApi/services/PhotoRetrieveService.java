@@ -20,5 +20,9 @@ public class PhotoRetrieveService {
 	public ArrayList<PhotoData> retrieveAllPhotos() {
 		return photoDatabaseService.retrieveAllPhotos();
 	}
+	
+	public String getImageForPhoto(String filename) {
+		return photoDatabaseService.getImageByFilename(filename);
+	}
 
 }

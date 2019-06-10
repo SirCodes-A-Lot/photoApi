@@ -29,4 +29,12 @@ public class PhotoDatabaseService {
 		return photoDataList;
 	}
 
+	public String getImageByFilename(String filename) {
+		return photoRepository.findByFilename(filename);
+	}
+
+	public int deleteAllPhotosByFilename(String filename) {
+		return photoRepository.deleteAllByFilename(filename);
+	}
+
 }

@@ -25,8 +25,8 @@ public class PhotoData {
     private String filename;
     
     private String imageData;
-    
-    private String format;
+
+	private String format;
     
     private String country;
     
@@ -83,6 +83,15 @@ public class PhotoData {
 
 	public double getyCoordinate() {
 		return yCoordinate;
+	}
+
+    
+    public String getImageData() {
+		return imageData;
+	}
+
+	public void setImageData(String imageData) {
+		this.imageData = imageData;
 	}
 
 	public void setId(int id) {
