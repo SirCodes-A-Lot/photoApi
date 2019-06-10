@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.photoApi.photoObjects.PhotoMetadata;
 import com.photoApi.photoObjects.Response;
 import com.photoApi.services.PhotoDeleteService;
 import com.photoApi.services.PhotoRetrieveService;
@@ -43,8 +44,15 @@ public class RestControllers {
 	//returns a requested photo data
 	@PostMapping(value = "/getRequestedPhotoData")
     public Response getRequestedPhotoData(@RequestBody HashMap<String,Object> requestData) {
+		Response response; 
     	HashMap<String,Object> responseData = new HashMap<String,Object> ();
-    	Response response = new Response("200", responseData);
+		if (requestData.containsKey("filename")) {
+			PhotoMetadata photoMetadata = photoRetrieveService.getPhotoMetadataByFilename((String) requestData.get("filename"));
+			responseData.put("photoMetadata", photoMetadata);
+			response = new Response("200", responseData);
+		} else {
+			response = new Response("400", responseData);
+		}
     	return response;
     }
 	

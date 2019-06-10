@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.photoApi.photoObjects.PhotoData;
+import com.photoApi.photoObjects.PhotoMetadata;
 
 @Service
 public class PhotoRetrieveService {
@@ -24,6 +25,15 @@ public class PhotoRetrieveService {
 	public String getImageForPhoto(String filename) {
 		//TODO do null check
 		return photoDatabaseService.getPhotoDataByFilename(filename).getImageData();
+	}
+	
+	public PhotoMetadata getPhotoMetadataByFilename(String filename){
+		PhotoData photoData = photoDatabaseService.getPhotoDataByFilename(filename);
+		if (photoData != null) {
+			return new PhotoMetadata(photoData);
+		} else {
+			return null;
+		}
 	}
 
 }
