@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.photoApi.photoObjects.PhotoData;
-import com.photoApi.repository.PhotoRepository;
+import com.photoApi.repositories.PhotoRepository;
 
 @Service
 public class PhotoDatabaseService {

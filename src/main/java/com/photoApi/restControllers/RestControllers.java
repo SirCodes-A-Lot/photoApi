@@ -28,8 +28,6 @@ public class RestControllers {
 	//returns a list of all photos data
 	@GetMapping("/getAllPhotosData")
 	public Response getAllPhotosData() {
-		//TODO remove line below
-		return new Response("", new HashMap<String, Object>());
     	HashMap<String,Object> responseData = new HashMap<String,Object> ();
     	Response response = new Response("200", responseData);
     	response.data.put("photoList", photoRetrieveService.retrieveAllPhotos());
