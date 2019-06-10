@@ -20,9 +20,6 @@ public class PhotoData {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-    @Column(nullable = false, updatable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    @CreatedDate
     private Date uploadDate;
     
     private String filename;
@@ -41,11 +38,10 @@ public class PhotoData {
 		super();
 	}
 
-	public PhotoData(int id, Date uploadDate, String filename, String format, String country, String city,
+	public PhotoData(String filename, String format, String country, String city,
 			double xCoordinate, double yCoordinate) {
 		super();
-		this.id = id;
-		this.uploadDate = uploadDate;
+		this.uploadDate = new Date();
 		this.filename = filename;
 		this.format = format;
 		this.country = country;
