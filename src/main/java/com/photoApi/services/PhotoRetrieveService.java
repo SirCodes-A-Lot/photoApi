@@ -1,6 +1,8 @@
 package com.photoApi.services;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.ListIterator;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,8 +20,14 @@ public class PhotoRetrieveService {
 		this.photoDatabaseService = photoDatabaseService;
 	}
 	
-	public ArrayList<PhotoData> retrieveAllPhotos() {
-		return photoDatabaseService.retrieveAllPhotos();
+	public ArrayList<PhotoMetadata> retrieveAllPhotosMetadata() {
+		ArrayList<PhotoData> photoDataList = photoDatabaseService.retrieveAllPhotos();
+		ArrayList<PhotoMetadata> photoMetadataList = new ArrayList<>();
+		ListIterator<PhotoData> photoDataIterator  = photoDataList.listIterator();
+		while (photoDataIterator.hasNext()) {
+			photoMetadataList.add(new PhotoMetadata(photoDataIterator.next()));
+		}
+		return photoMetadataList;
 	}
 	
 	public String getImageForPhoto(String filename) {

@@ -36,7 +36,7 @@ public class RestControllers {
 	public Response getAllPhotosData() {
     	HashMap<String,Object> responseData = new HashMap<String,Object> ();
     	Response response = new Response("200", responseData);
-    	response.data.put("photoList", photoRetrieveService.retrieveAllPhotos());
+    	response.data.put("photoList", photoRetrieveService.retrieveAllPhotosMetadata());
 		return response;
 	}
 	
