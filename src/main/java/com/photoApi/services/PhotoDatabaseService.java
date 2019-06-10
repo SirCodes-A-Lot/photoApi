@@ -29,7 +29,7 @@ public class PhotoDatabaseService {
 		return photoDataList;
 	}
 
-	public String getImageByFilename(String filename) {
+	public PhotoData getPhotoDataByFilename(String filename) {
 		return photoRepository.findByFilename(filename);
 	}
 
