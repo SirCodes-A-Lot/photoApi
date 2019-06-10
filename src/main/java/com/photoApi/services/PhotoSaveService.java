@@ -3,7 +3,9 @@ package com.photoApi.services;
 import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import com.photoApi.photoObjects.PhotoData;
 
@@ -17,9 +19,9 @@ public class PhotoSaveService {
 		this.photoDatabaseService = photoDatabaseService;
 	}
 	
-	public void savePhotoToDataBase(String filename, String format, double xCoord, double yCoord) {
+	public void savePhotoToDataBase(String filename, String imageData, String format, double xCoord, double yCoord) {
 		HashMap<String, String> location = getPhotoLocation(xCoord, yCoord);
-		PhotoData photoData = new PhotoData(filename, format, location.get("country"), location.get("city"),
+		PhotoData photoData = new PhotoData(filename, imageData, format, location.get("country"), location.get("city"),
 				xCoord, yCoord);
 		photoDatabaseService.savePhotoToDatabase(photoData);
 	}
@@ -29,9 +31,11 @@ public class PhotoSaveService {
 	 */
 	private HashMap<String, String> getPhotoLocation(double xCoord, double yCoord) {
 		HashMap<String, String> location = new HashMap<>();
-		//TODO get location data and populate into hashmap
-		location.put("city", "city will go here");
-		location.put("country", "country will go here");
+        RestTemplate restTemplate = new RestTemplate();
+        String geocodeUrl = "https://geocode.xyz/" + xCoord + "," + yCoord + "?json=1&auth=320198293500272387838x2579";
+        HashMap locationData = restTemplate.getForObject(geocodeUrl, HashMap.class);
+		location.put("city", (String) locationData.get("city"));
+		location.put("country", (String) locationData.get("country"));
 		
 		return location;
 	}

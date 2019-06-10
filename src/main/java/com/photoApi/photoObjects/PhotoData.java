@@ -24,6 +24,8 @@ public class PhotoData {
     
     private String filename;
     
+    private String imageData;
+    
     private String format;
     
     private String country;
@@ -38,11 +40,12 @@ public class PhotoData {
 		super();
 	}
 
-	public PhotoData(String filename, String format, String country, String city,
+	public PhotoData(String filename, String imageData, String format, String country, String city,
 			double xCoordinate, double yCoordinate) {
 		super();
 		this.uploadDate = new Date();
 		this.filename = filename;
+		this.imageData = imageData;
 		this.format = format;
 		this.country = country;
 		this.city = city;
