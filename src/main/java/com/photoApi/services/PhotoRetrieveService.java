@@ -1,7 +1,6 @@
 package com.photoApi.services;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.ListIterator;
 
 import org.springframework.beans.factory.annotation.Autowired;
