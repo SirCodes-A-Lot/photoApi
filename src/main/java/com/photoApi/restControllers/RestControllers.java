@@ -34,6 +34,7 @@ public class RestControllers {
 		return response;
 	}
 	
+	//TODO
 	//returns a requested photo data
 	@PostMapping(value = "/getRequestedPhotoData")
     public Response getRequestedPhotoData(@RequestBody HashMap<String,Object> requestData) {
@@ -46,10 +47,21 @@ public class RestControllers {
 	@PostMapping(value = "/uploadPhoto")
     public Response uploadPhoto(@RequestBody HashMap<String,Object> requestData) {
     	HashMap<String,Object> responseData = new HashMap<String,Object> ();
-    	Response response = new Response("200", responseData);
+    	Response response; 
+    	if (requestData.containsKey("xcoord") && requestData.containsKey("ycoord") && requestData.containsKey("filename")) {
+        	response = new Response("200", responseData);
+        	photoSaveService.savePhotoToDataBase(
+        			(String) requestData.get("filename"), (String) requestData.get("format"),
+        			Double.valueOf((String) requestData.get("xcoord")),
+        			Double.valueOf((String) requestData.get("ycoord")));
+    	} else {
+    		response = new Response("400", responseData);
+    	}
+
     	return response;
     }
 	
+	//TODO
 	//deletes a photo from the database
 	@PostMapping(value = "/deletePhoto")
     public Response deletePhoto(@RequestBody HashMap<String,Object> requestData) {
@@ -58,6 +70,7 @@ public class RestControllers {
     	return response;
     }
 	
+	//TODO
 	//get a photo picture
 	@PostMapping(value = "/getPhotoPicture")
     public Response getPhotoPicture(@RequestBody HashMap<String,Object> requestData) {
