@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.photoApi.photoObjects.PhotoMetadata;
@@ -16,6 +17,8 @@ import com.photoApi.services.PhotoSaveService;
 
 @RestController
 public class RestControllers {
+	
+	private final Long API_KEY = 5634563846456L;
 	
 	private PhotoSaveService photoSaveService;
 	
@@ -33,7 +36,10 @@ public class RestControllers {
 	
 	//returns a list of all photos data
 	@GetMapping("/getAllPhotosData")
-	public Response getAllPhotosData() {
+	public Response getAllPhotosData(@RequestHeader("Api-Key") Long apiKey) {
+		if (apiKey - API_KEY != 0) {
+			return null;
+		}
     	HashMap<String,Object> responseData = new HashMap<String,Object> ();
     	Response response = new Response("200", responseData);
     	response.data.put("photoList", photoRetrieveService.retrieveAllPhotosMetadata());
@@ -42,7 +48,10 @@ public class RestControllers {
 	
 	//returns a requested photo data
 	@PostMapping(value = "/getRequestedPhotoData")
-    public Response getRequestedPhotoData(@RequestBody HashMap<String,Object> requestData) {
+    public Response getRequestedPhotoData(@RequestBody HashMap<String,Object> requestData, @RequestHeader("Api-Key") Long apiKey) {
+		if (apiKey - API_KEY != 0) {
+			return null;
+		}
 		Response response; 
     	HashMap<String,Object> responseData = new HashMap<String,Object> ();
 		if (requestData.containsKey("filename")) {
@@ -57,27 +66,35 @@ public class RestControllers {
 	
 	//uploads a photo to the database
 	@PostMapping(value = "/uploadPhoto")
-    public Response uploadPhoto(@RequestBody HashMap<String,Object> requestData) {
+    public Response uploadPhoto(@RequestBody HashMap<String,Object> requestData, @RequestHeader("Api-Key") Long apiKey) {
+		if (apiKey - API_KEY != 0) {
+			return null;
+		}
     	HashMap<String,Object> responseData = new HashMap<String,Object> ();
     	Response response; 
     	if (requestData.containsKey("xcoord") && requestData.containsKey("ycoord") &&
     			requestData.containsKey("filename") && requestData.containsKey("imageData")) {
-        	response = new Response("200", responseData);
-        	photoSaveService.savePhotoToDataBase(
+        	boolean isUniqueFilename = photoSaveService.savePhotoToDataBase(
         			(String) requestData.get("filename"), (String) requestData.get("imageData"),
         			(String) requestData.get("format"),
         			Double.valueOf((String) requestData.get("xcoord")),
         			Double.valueOf((String) requestData.get("ycoord")));
+        	if (!isUniqueFilename) {
+        		responseData.put("Error", "File names must be unique");
+        	}
+        	response = new Response("200", responseData);
     	} else {
     		response = new Response("400", responseData);
     	}
-
     	return response;
     }
 	
 	//deletes a photo from the database
 	@PostMapping(value = "/deletePhoto")
-    public Response deletePhoto(@RequestBody HashMap<String,Object> requestData) {
+    public Response deletePhoto(@RequestBody HashMap<String,Object> requestData, @RequestHeader("Api-Key") Long apiKey) {
+		if (apiKey - API_KEY != 0) {
+			return null;
+		}
 		Response response; 
     	HashMap<String,Object> responseData = new HashMap<String,Object> ();
 		if (requestData.containsKey("filename")) {
@@ -92,7 +109,10 @@ public class RestControllers {
 	
 	//get a photo picture
 	@PostMapping(value = "/getPhotoPicture")
-    public Response getPhotoPicture(@RequestBody HashMap<String,Object> requestData) {
+    public Response getPhotoPicture(@RequestBody HashMap<String,Object> requestData, @RequestHeader("Api-Key") Long apiKey) {
+		if (apiKey - API_KEY != 0) {
+			return null;
+		}
 		Response response; 
     	HashMap<String,Object> responseData = new HashMap<String,Object> ();
 		if (requestData.containsKey("filename")) {
