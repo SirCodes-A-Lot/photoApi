@@ -81,7 +81,7 @@ response -
 {
     "status": "200",
     "data": {
-        "Status": "Success"
+        "Status": "success"
     }
 }
 -OR-
