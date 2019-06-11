@@ -48,7 +48,8 @@ public class RestControllers {
 	
 	//returns a requested photo data
 	@PostMapping(value = ApiConstants.GET_REQUESTED_PHOTO_METADATA_URL)
-    public Response getRequestedPhotoData(@RequestBody HashMap<String,Object> requestData, @RequestHeader(ApiConstants.API_KEY) Long apiKey) {
+    public Response getRequestedPhotoData(@RequestBody HashMap<String,Object> requestData,
+    		@RequestHeader(ApiConstants.API_KEY) Long apiKey) {
 		if (apiKey == null || apiKey - ApiConstants.API_KEY_VALUE != 0) {
 			return new Response("403", null);
 		}
@@ -67,7 +68,8 @@ public class RestControllers {
 	
 	//uploads a photo to the database
 	@PostMapping(value = ApiConstants.PHOTO_URL)
-    public Response uploadPhoto(@RequestBody HashMap<String,Object> requestData, @RequestHeader(ApiConstants.API_KEY) Long apiKey) {
+    public Response uploadPhoto(@RequestBody HashMap<String,Object> requestData,
+    		@RequestHeader(ApiConstants.API_KEY) Long apiKey) {
 		if (apiKey == null || apiKey - ApiConstants.API_KEY_VALUE != 0) {
 			return new Response("403", null);
 		}
@@ -94,7 +96,8 @@ public class RestControllers {
 	
 	//deletes a photo from the database
 	@DeleteMapping(value = ApiConstants.PHOTO_URL)
-    public Response deletePhoto(@RequestBody HashMap<String,Object> requestData, @RequestHeader(ApiConstants.API_KEY) Long apiKey) {
+    public Response deletePhoto(@RequestBody HashMap<String,Object> requestData,
+    		@RequestHeader(ApiConstants.API_KEY) Long apiKey) {
 		if (apiKey == null || apiKey - ApiConstants.API_KEY_VALUE != 0) {
 			return new Response("403", null);
 		}
@@ -113,7 +116,8 @@ public class RestControllers {
 	
 	//get a photo picture
 	@PostMapping(value = ApiConstants.GET_REQUESTED_PHOTO_IMAGE_DATA_URL)
-    public Response getPhotoPicture(@RequestBody HashMap<String,Object> requestData, @RequestHeader(ApiConstants.API_KEY) Long apiKey) {
+    public Response getPhotoPicture(@RequestBody HashMap<String,Object> requestData,
+    		@RequestHeader(ApiConstants.API_KEY) Long apiKey) {
 		if (apiKey == null || apiKey - ApiConstants.API_KEY_VALUE != 0) {
 			return new Response("403", null);
 		}
