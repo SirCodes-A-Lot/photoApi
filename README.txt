@@ -13,6 +13,7 @@ All requests must include the header "Api-Key" with the valid API key.
 Status codes. 
 200 - valid request
 400 - invalid request. Request possibly lacking required fields
+403 - invalid api key.
 
 ================================================================================
 

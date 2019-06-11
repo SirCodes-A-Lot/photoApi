@@ -39,7 +39,7 @@ public class RestControllers {
 	@GetMapping("/getAllPhotosData")
 	public Response getAllPhotosData(@RequestHeader("Api-Key") Long apiKey) {
 		if (apiKey == null || apiKey - API_KEY != 0) {
-			return null;
+			return new Response("403", null);
 		}
     	HashMap<String,Object> responseData = new HashMap<String,Object> ();
     	Response response = new Response("200", responseData);
@@ -51,7 +51,7 @@ public class RestControllers {
 	@PostMapping(value = "/getRequestedPhotoData")
     public Response getRequestedPhotoData(@RequestBody HashMap<String,Object> requestData, @RequestHeader("Api-Key") Long apiKey) {
 		if (apiKey == null || apiKey - API_KEY != 0) {
-			return null;
+			return new Response("403", null);
 		}
 		Response response; 
     	HashMap<String,Object> responseData = new HashMap<String,Object> ();
@@ -69,7 +69,7 @@ public class RestControllers {
 	@PostMapping(value = "/photo")
     public Response uploadPhoto(@RequestBody HashMap<String,Object> requestData, @RequestHeader("Api-Key") Long apiKey) {
 		if (apiKey == null || apiKey - API_KEY != 0) {
-			return null;
+			return new Response("403", null);
 		}
     	HashMap<String,Object> responseData = new HashMap<String,Object> ();
     	Response response; 
@@ -92,7 +92,7 @@ public class RestControllers {
 	@DeleteMapping(value = "/photo")
     public Response deletePhoto(@RequestBody HashMap<String,Object> requestData, @RequestHeader("Api-Key") Long apiKey) {
 		if (apiKey == null || apiKey - API_KEY != 0) {
-			return null;
+			return new Response("403", null);
 		}
 		Response response; 
     	HashMap<String,Object> responseData = new HashMap<String,Object> ();
@@ -110,7 +110,7 @@ public class RestControllers {
 	@PostMapping(value = "/getPhotoPicture")
     public Response getPhotoPicture(@RequestBody HashMap<String,Object> requestData, @RequestHeader("Api-Key") Long apiKey) {
 		if (apiKey == null || apiKey - API_KEY != 0) {
-			return null;
+			return new Response("403", null);
 		}
 		Response response; 
     	HashMap<String,Object> responseData = new HashMap<String,Object> ();
