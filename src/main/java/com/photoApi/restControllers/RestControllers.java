@@ -81,7 +81,11 @@ public class RestControllers {
         			Double.valueOf((String) requestData.get("xcoord")),
         			Double.valueOf((String) requestData.get("ycoord")));
         	responseData.put("Status", addPhotoStatus);
-        	response = new Response("200", responseData);
+        	if (addPhotoStatus == "Success") {
+        		response = new Response("201", responseData);
+        	} else {
+        		response = new Response("409", responseData);
+        	}
     	} else {
     		response = new Response("400", responseData);
     	}

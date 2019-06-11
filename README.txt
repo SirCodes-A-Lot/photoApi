@@ -12,8 +12,10 @@ All requests must include the header "Api-Key" with the valid API key.
 
 Status codes. 
 200 - valid request
+201 - photo uploaded successfully
 400 - invalid request. Request possibly lacking required fields
 403 - invalid api key.
+409 - photo or filename already exists in database
 
 ================================================================================
 
