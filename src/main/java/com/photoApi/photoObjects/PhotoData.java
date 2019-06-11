@@ -7,7 +7,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-//TODO check this is the right entity import and other imports are correct too!
 @Entity
 public class PhotoData {
 	
