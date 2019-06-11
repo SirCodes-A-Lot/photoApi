@@ -72,13 +72,22 @@ request -
 response -
 {
     "status": "200",
-    "data": {}
+    "data": {
+        "Status": "Success"
+    }
 }
 -OR-
 {
     "status": "200",
     "data": {
-        "Error": "File names and content must be unique"
+        "Status": "ERROR: file name taken"
+    }
+}
+-OR-
+{
+    "status": "200",
+    "data": {
+        "Status": "ERROR: this image has already been uploaded. Filename is: pic5.jpeg"
     }
 }
 

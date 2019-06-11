@@ -74,14 +74,12 @@ public class RestControllers {
     	Response response; 
     	if (requestData.containsKey("xcoord") && requestData.containsKey("ycoord") &&
     			requestData.containsKey("filename") && requestData.containsKey("imageData")) {
-        	boolean isUniqueFilename = photoSaveService.savePhotoToDataBase(
+        	String addPhotoStatus = photoSaveService.savePhotoToDataBase(
         			(String) requestData.get("filename"), (String) requestData.get("imageData"),
         			(String) requestData.get("format"),
         			Double.valueOf((String) requestData.get("xcoord")),
         			Double.valueOf((String) requestData.get("ycoord")));
-        	if (!isUniqueFilename) {
-        		responseData.put("Error", "File names and content must be unique");
-        	}
+        	responseData.put("Status", addPhotoStatus);
         	response = new Response("200", responseData);
     	} else {
     		response = new Response("400", responseData);

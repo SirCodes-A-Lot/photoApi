@@ -18,16 +18,20 @@ public class PhotoSaveService {
 		this.photoDatabaseService = photoDatabaseService;
 	}
 	
-	public boolean savePhotoToDataBase(String filename, String imageData, String format, double xCoord, double yCoord) {
-		if (photoDatabaseService.findPhotoDataByFilename (filename)!= null ||
-			photoDatabaseService.findPhotoByPhotoData(imageData) != null) {
-			return false;
+	public String savePhotoToDataBase(String filename, String imageData, String format, double xCoord, double yCoord) {
+		if (photoDatabaseService.findPhotoDataByFilename (filename)!= null) {
+			return "ERROR: file name taken";
+		}
+		
+		PhotoData photoWithImageData = photoDatabaseService.findPhotoByPhotoData(imageData);
+		if (photoWithImageData!= null) {
+			return "ERROR: this image has already been uploaded. Filename is: " + photoWithImageData.getFilename();
 		}
 		HashMap<String, String> location = getPhotoLocation(xCoord, yCoord);
 		PhotoData photoData = new PhotoData(filename, imageData, format, location.get("country"), location.get("city"),
 				xCoord, yCoord);
 		photoDatabaseService.savePhotoToDatabase(photoData);
-		return true;
+		return "Success";
 	}
 	
 	/**
