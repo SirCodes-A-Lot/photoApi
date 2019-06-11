@@ -16,8 +16,8 @@ End points with examples:
 
 /getAllPhotosData
 
-gets all metadata fields of all images stored in the database. If there are no stored images, photoList will be an empty list
 method - GET
+description - gets all metadata fields of all images stored in the database. If there are no stored images, photoList will be an empty list
 response -
 {
     "status": "200",
@@ -58,9 +58,10 @@ response -
 
 --------------------------------------------------------------------------------
 
-/uploadPhoto
-uploads a photo to the database.
+/photo
+
 method - POST
+description - uploads a photo to the database.
 request -
 {
 	"xcoord" : "51.5074",
@@ -93,10 +94,10 @@ response -
 
 --------------------------------------------------------------------------------
 
-/deletePhoto
-deletes a photo from the database matching the provided filename. the number deleted will be 0 if the photo was not in the
+/photo
+method - DELETE
+description - deletes a photo from the database matching the provided filename. the number deleted will be 0 if the photo was not in the
 database or 1 if it was (as this api only accepts unique filenames, this number should not be more than 1 in normal use).
-method - POST
 request - 
 {
 	"filename" : "pic.jpeg"

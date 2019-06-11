@@ -3,6 +3,7 @@ package com.photoApi.restControllers;
 import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -65,7 +66,7 @@ public class RestControllers {
     }
 	
 	//uploads a photo to the database
-	@PostMapping(value = "/uploadPhoto")
+	@PostMapping(value = "/photo")
     public Response uploadPhoto(@RequestBody HashMap<String,Object> requestData, @RequestHeader("Api-Key") Long apiKey) {
 		if (apiKey - API_KEY != 0) {
 			return null;
@@ -88,7 +89,7 @@ public class RestControllers {
     }
 	
 	//deletes a photo from the database
-	@PostMapping(value = "/deletePhoto")
+	@DeleteMapping(value = "/photo")
     public Response deletePhoto(@RequestBody HashMap<String,Object> requestData, @RequestHeader("Api-Key") Long apiKey) {
 		if (apiKey - API_KEY != 0) {
 			return null;
