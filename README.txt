@@ -42,8 +42,8 @@ response -
 
 /getRequestedPhotoData
 
-gets all metadata fields of image matching the provided filename
 method - POST
+description - gets all metadata fields of image matching the provided filename
 request -
 {
 	"filename" : "pic.jpeg"
@@ -95,6 +95,7 @@ response -
 --------------------------------------------------------------------------------
 
 /photo
+
 method - DELETE
 description - deletes a photo from the database matching the provided filename. the number deleted will be 0 if the photo was not in the
 database or 1 if it was (as this api only accepts unique filenames, this number should not be more than 1 in normal use).
@@ -121,8 +122,8 @@ response -
 --------------------------------------------------------------------------------
 
 /getPhotoPicture
-gets the image
 method - POST
+description - gets the image
 request -
 {
 	"filename" : "pic.jpeg"
