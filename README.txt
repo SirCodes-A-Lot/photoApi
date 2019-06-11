@@ -10,6 +10,10 @@ Filenames and image data must be unique.
 
 All requests must include the header "Api-Key" with the valid API key.
 
+Status codes. 
+200 - valid request
+400 - invalid request. Request possibly lacking required fields
+
 ================================================================================
 
 End points with examples:
