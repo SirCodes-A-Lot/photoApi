@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.photoApi.Constants.ApiConstants;
 import com.photoApi.photoObjects.PhotoMetadata;
 import com.photoApi.photoObjects.Response;
 import com.photoApi.services.PhotoDeleteService;
@@ -81,7 +82,7 @@ public class RestControllers {
         			Double.valueOf((String) requestData.get("xcoord")),
         			Double.valueOf((String) requestData.get("ycoord")));
         	responseData.put("Status", addPhotoStatus);
-        	if (addPhotoStatus == "Success") {
+        	if (addPhotoStatus == ApiConstants.SUCCESS) {
         		response = new Response("201", responseData);
         	} else {
         		response = new Response("409", responseData);

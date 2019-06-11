@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import com.photoApi.Constants.ApiConstants;
 import com.photoApi.photoObjects.PhotoData;
 
 @Service
@@ -28,10 +29,10 @@ public class PhotoSaveService {
 			return "ERROR: this image has already been uploaded. Filename is: " + photoWithImageData.getFilename();
 		}
 		HashMap<String, String> location = getPhotoLocation(xCoord, yCoord);
-		PhotoData photoData = new PhotoData(filename, imageData, format, location.get("country"), location.get("city"),
+		PhotoData photoData = new PhotoData(filename, imageData, format, location.get(ApiConstants.COUNTRY), location.get(ApiConstants.CITY),
 				xCoord, yCoord);
 		photoDatabaseService.savePhotoToDatabase(photoData);
-		return "Success";
+		return ApiConstants.SUCCESS;
 	}
 	
 	/**
@@ -43,8 +44,8 @@ public class PhotoSaveService {
         RestTemplate restTemplate = new RestTemplate();
         String geocodeUrl = "https://geocode.xyz/" + xCoord + "," + yCoord + "?json=1&auth=320198293500272387838x2579";
 		HashMap<String, Object> locationData = restTemplate.getForObject(geocodeUrl, HashMap.class);
-		location.put("city", (String) locationData.get("city"));
-		location.put("country", (String) locationData.get("country"));
+		location.put(ApiConstants.CITY, (String) locationData.get(ApiConstants.CITY));
+		location.put(ApiConstants.COUNTRY, (String) locationData.get(ApiConstants.COUNTRY));
 		
 		return location;
 	}
