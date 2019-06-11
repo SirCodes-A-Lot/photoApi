@@ -14,6 +14,9 @@ public class ApiConstants {
 	public static final String FILENAME = "filename";
 	public static final String FORMAT = "format";
 	public static final String IMAGE_DATA = "imageData";
+	public static final String X_COORDINATE = "xCoordinate";
+	public static final String Y_COORDINATE = "yCoordinate";
+	
 	public static final String COUNTRY = "country";
 	public static final String CITY = "city";
 	

@@ -73,13 +73,13 @@ public class RestControllers {
 		}
     	HashMap<String,Object> responseData = new HashMap<String,Object> ();
     	Response response; 
-    	if (requestData.containsKey("xcoord") && requestData.containsKey("ycoord") &&
+    	if (requestData.containsKey(ApiConstants.X_COORDINATE) && requestData.containsKey(ApiConstants.Y_COORDINATE) &&
     			requestData.containsKey(ApiConstants.FILENAME) && requestData.containsKey(ApiConstants.IMAGE_DATA)) {
         	String addPhotoStatus = photoSaveService.savePhotoToDataBase(
         			(String) requestData.get(ApiConstants.FILENAME), (String) requestData.get(ApiConstants.IMAGE_DATA),
         			(String) requestData.get(ApiConstants.FORMAT),
-        			Double.valueOf((String) requestData.get("xcoord")),
-        			Double.valueOf((String) requestData.get("ycoord")));
+        			Double.valueOf((String) requestData.get(ApiConstants.X_COORDINATE)),
+        			Double.valueOf((String) requestData.get(ApiConstants.Y_COORDINATE)));
         	responseData.put(ApiConstants.STATUS_REPORT, addPhotoStatus);
         	if (addPhotoStatus == ApiConstants.SUCCESS) {
         		response = new Response("201", responseData);

@@ -71,8 +71,8 @@ method - POST
 description - uploads a photo to the database.
 request -
 {
-	"xcoord" : "51.5074",
-	"ycoord" : "0.1278",
+	"xCoordinate" : "51.5074",
+	"yCoordinate" : "0.1278",
 	"filename" : "pic.jpeg",
 	"imageData" : "here is some stringified image data",
 	"format" : "jpeg"
