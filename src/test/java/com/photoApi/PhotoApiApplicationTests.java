@@ -1,4 +1,4 @@
-package com.photoApi.photoApi;
+package com.photoApi;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
