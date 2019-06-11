@@ -21,16 +21,16 @@ public class PhotoSaveService {
 	
 	public String savePhotoToDataBase(String filename, String imageData, String format, double xCoord, double yCoord) {
 		if (photoDatabaseService.findPhotoDataByFilename (filename)!= null) {
-			return "ERROR: file name taken";
+			return ApiConstants.ERROR_FILENAME_TAKEN;
 		}
 		
 		PhotoData photoWithImageData = photoDatabaseService.findPhotoByPhotoData(imageData);
 		if (photoWithImageData!= null) {
-			return "ERROR: this image has already been uploaded. Filename is: " + photoWithImageData.getFilename();
+			return ApiConstants.ERROR_ALREADY_UPLOADED_FILENAME_IS + photoWithImageData.getFilename();
 		}
 		HashMap<String, String> location = getPhotoLocation(xCoord, yCoord);
-		PhotoData photoData = new PhotoData(filename, imageData, format, location.get(ApiConstants.COUNTRY), location.get(ApiConstants.CITY),
-				xCoord, yCoord);
+		PhotoData photoData = new PhotoData(filename, imageData, format, location.get(ApiConstants.COUNTRY),
+				location.get(ApiConstants.CITY), xCoord, yCoord);
 		photoDatabaseService.savePhotoToDatabase(photoData);
 		return ApiConstants.SUCCESS;
 	}
@@ -42,7 +42,7 @@ public class PhotoSaveService {
 	private HashMap<String, String> getPhotoLocation(double xCoord, double yCoord) {
 		HashMap<String, String> location = new HashMap<>();
         RestTemplate restTemplate = new RestTemplate();
-        String geocodeUrl = "https://geocode.xyz/" + xCoord + "," + yCoord + "?json=1&auth=320198293500272387838x2579";
+        String geocodeUrl = ApiConstants.GEOCODE_URL_START + xCoord + "," + yCoord + ApiConstants.GEOCODE_URL_END;
 		HashMap<String, Object> locationData = restTemplate.getForObject(geocodeUrl, HashMap.class);
 		location.put(ApiConstants.CITY, (String) locationData.get(ApiConstants.CITY));
 		location.put(ApiConstants.COUNTRY, (String) locationData.get(ApiConstants.COUNTRY));
