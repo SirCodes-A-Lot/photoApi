@@ -81,21 +81,21 @@ response -
 {
     "status": "200",
     "data": {
-        "Status": "success"
+        "statusReport": "success"
     }
 }
 -OR-
 {
     "status": "200",
     "data": {
-        "Status": "ERROR: file name taken"
+        "statusReport": "ERROR: file name taken"
     }
 }
 -OR-
 {
     "status": "200",
     "data": {
-        "Status": "ERROR: this image has already been uploaded. Filename is: pic5.jpeg"
+        "statusReport": "ERROR: this image has already been uploaded. Filename is: pic5.jpeg"
     }
 }
 

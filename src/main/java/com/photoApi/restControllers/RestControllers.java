@@ -20,8 +20,6 @@ import com.photoApi.services.PhotoSaveService;
 @RestController
 public class RestControllers {
 	
-	private final Long API_KEY = 5634563846456L;
-	
 	private PhotoSaveService photoSaveService;
 	
 	private PhotoRetrieveService photoRetrieveService;
@@ -37,28 +35,29 @@ public class RestControllers {
 	}
 	
 	//returns a list of all photos data
-	@GetMapping("/getAllPhotosData")
-	public Response getAllPhotosData(@RequestHeader("Api-Key") Long apiKey) {
-		if (apiKey == null || apiKey - API_KEY != 0) {
+	@GetMapping(ApiConstants.GET_ALL_PHOTOS_URL)
+	public Response getAllPhotosData(@RequestHeader(ApiConstants.API_KEY) Long apiKey) {
+		if (apiKey == null || apiKey - ApiConstants.API_KEY_VALUE != 0) {
 			return new Response("403", null);
 		}
     	HashMap<String,Object> responseData = new HashMap<String,Object> ();
     	Response response = new Response("200", responseData);
-    	response.data.put("photoList", photoRetrieveService.retrieveAllPhotosMetadata());
+    	response.data.put(ApiConstants.PHOTO_LIST, photoRetrieveService.retrieveAllPhotosMetadata());
 		return response;
 	}
 	
 	//returns a requested photo data
-	@PostMapping(value = "/getRequestedPhotoData")
-    public Response getRequestedPhotoData(@RequestBody HashMap<String,Object> requestData, @RequestHeader("Api-Key") Long apiKey) {
-		if (apiKey == null || apiKey - API_KEY != 0) {
+	@PostMapping(value = ApiConstants.GET_REQUESTED_PHOTO_METADATA_URL)
+    public Response getRequestedPhotoData(@RequestBody HashMap<String,Object> requestData, @RequestHeader(ApiConstants.API_KEY) Long apiKey) {
+		if (apiKey == null || apiKey - ApiConstants.API_KEY_VALUE != 0) {
 			return new Response("403", null);
 		}
 		Response response; 
     	HashMap<String,Object> responseData = new HashMap<String,Object> ();
-		if (requestData.containsKey("filename")) {
-			PhotoMetadata photoMetadata = photoRetrieveService.getPhotoMetadataByFilename((String) requestData.get("filename"));
-			responseData.put("photoMetadata", photoMetadata);
+		if (requestData.containsKey(ApiConstants.FILENAME)) {
+			PhotoMetadata photoMetadata = 
+					photoRetrieveService.getPhotoMetadataByFilename((String) requestData.get(ApiConstants.FILENAME));
+			responseData.put(ApiConstants.PHOTO_METADATA, photoMetadata);
 			response = new Response("200", responseData);
 		} else {
 			response = new Response("400", responseData);
@@ -67,21 +66,21 @@ public class RestControllers {
     }
 	
 	//uploads a photo to the database
-	@PostMapping(value = "/photo")
-    public Response uploadPhoto(@RequestBody HashMap<String,Object> requestData, @RequestHeader("Api-Key") Long apiKey) {
-		if (apiKey == null || apiKey - API_KEY != 0) {
+	@PostMapping(value = ApiConstants.PHOTO_URL)
+    public Response uploadPhoto(@RequestBody HashMap<String,Object> requestData, @RequestHeader(ApiConstants.API_KEY) Long apiKey) {
+		if (apiKey == null || apiKey - ApiConstants.API_KEY_VALUE != 0) {
 			return new Response("403", null);
 		}
     	HashMap<String,Object> responseData = new HashMap<String,Object> ();
     	Response response; 
     	if (requestData.containsKey("xcoord") && requestData.containsKey("ycoord") &&
-    			requestData.containsKey("filename") && requestData.containsKey("imageData")) {
+    			requestData.containsKey(ApiConstants.FILENAME) && requestData.containsKey(ApiConstants.IMAGE_DATA)) {
         	String addPhotoStatus = photoSaveService.savePhotoToDataBase(
-        			(String) requestData.get("filename"), (String) requestData.get("imageData"),
-        			(String) requestData.get("format"),
+        			(String) requestData.get(ApiConstants.FILENAME), (String) requestData.get(ApiConstants.IMAGE_DATA),
+        			(String) requestData.get(ApiConstants.FORMAT),
         			Double.valueOf((String) requestData.get("xcoord")),
         			Double.valueOf((String) requestData.get("ycoord")));
-        	responseData.put("Status", addPhotoStatus);
+        	responseData.put(ApiConstants.STATUS_REPORT, addPhotoStatus);
         	if (addPhotoStatus == ApiConstants.SUCCESS) {
         		response = new Response("201", responseData);
         	} else {
@@ -94,16 +93,17 @@ public class RestControllers {
     }
 	
 	//deletes a photo from the database
-	@DeleteMapping(value = "/photo")
-    public Response deletePhoto(@RequestBody HashMap<String,Object> requestData, @RequestHeader("Api-Key") Long apiKey) {
-		if (apiKey == null || apiKey - API_KEY != 0) {
+	@DeleteMapping(value = ApiConstants.PHOTO_URL)
+    public Response deletePhoto(@RequestBody HashMap<String,Object> requestData, @RequestHeader(ApiConstants.API_KEY) Long apiKey) {
+		if (apiKey == null || apiKey - ApiConstants.API_KEY_VALUE != 0) {
 			return new Response("403", null);
 		}
 		Response response; 
     	HashMap<String,Object> responseData = new HashMap<String,Object> ();
-		if (requestData.containsKey("filename")) {
-			int numberDeleted = photoDeleteService.deleteAllPhotosByFilename((String) requestData.get("filename"));
-			responseData.put("numberDeleted", numberDeleted);
+		if (requestData.containsKey(ApiConstants.FILENAME)) {
+			int numberDeleted = 
+					photoDeleteService.deleteAllPhotosByFilename((String) requestData.get(ApiConstants.FILENAME));
+			responseData.put(ApiConstants.NUMBER_DELETED, numberDeleted);
 			response = new Response("200", responseData);
 		} else {
 			response = new Response("400", responseData);
@@ -112,16 +112,16 @@ public class RestControllers {
     }
 	
 	//get a photo picture
-	@PostMapping(value = "/getPhotoPicture")
-    public Response getPhotoPicture(@RequestBody HashMap<String,Object> requestData, @RequestHeader("Api-Key") Long apiKey) {
-		if (apiKey == null || apiKey - API_KEY != 0) {
+	@PostMapping(value = ApiConstants.GET_REQUESTED_PHOTO_IMAGE_DATA_URL)
+    public Response getPhotoPicture(@RequestBody HashMap<String,Object> requestData, @RequestHeader(ApiConstants.API_KEY) Long apiKey) {
+		if (apiKey == null || apiKey - ApiConstants.API_KEY_VALUE != 0) {
 			return new Response("403", null);
 		}
 		Response response; 
     	HashMap<String,Object> responseData = new HashMap<String,Object> ();
-		if (requestData.containsKey("filename")) {
-			String imageData = photoRetrieveService.getImageForPhoto((String) requestData.get("filename"));
-			responseData.put("imageData", imageData);
+		if (requestData.containsKey(ApiConstants.FILENAME)) {
+			String imageData = photoRetrieveService.getImageForPhoto((String) requestData.get(ApiConstants.FILENAME));
+			responseData.put(ApiConstants.IMAGE_DATA, imageData);
 			response = new Response("200", responseData);
 		} else {
 			response = new Response("400", responseData);
