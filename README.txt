@@ -79,21 +79,21 @@ request -
 }
 response -
 {
-    "status": "200",
+    "status": "201",
     "data": {
         "statusReport": "success"
     }
 }
 -OR-
 {
-    "status": "200",
+    "status": "409",
     "data": {
         "statusReport": "ERROR: file name taken"
     }
 }
 -OR-
 {
-    "status": "200",
+    "status": "409",
     "data": {
         "statusReport": "ERROR: this image has already been uploaded. Filename is: pic5.jpeg"
     }
